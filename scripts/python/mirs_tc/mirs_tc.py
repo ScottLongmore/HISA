@@ -38,7 +38,7 @@ except:
 import setup_logging
 import error_codes
 import utils
-import libmirs_tc as mirs_tc 
+import libMIRSTC as mirs_tc 
 import pool.pool as pool_api
 
 # Setup Logging using logging templates
