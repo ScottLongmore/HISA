@@ -222,14 +222,22 @@ for adeck in adecks:
     utils.workDir(stormDir) 
     utils.cdDir(stormDir)
 
+    # Filter adeck file with needed records, fixes corrupt records issue 
+    adeckFile=adeck.get('filename')
+    adeckFilename=os.path.join(dataDir,adeckFile)
+    adeckSTTfile="a{}.dat".format(stormId)
+    adeckSSTfilename=os.path.join(stormDir,adeckSSTfile)
+
+    status=utils.textFileRecordFilter(adeckFilename,adeckSSTfilename,config['datasets']['adeck']['recordREs'])
+    if(status not True):
+        LOG.warning("Problem filtering adeck records, skipping to next storm")
+        continue
+
     # Run ShortTermTrack -  outputs track and forecast track for TC by hour 
     #
     #   Inputs: adeck [a<stormId>.dat] file 
     #   Outputs: ShortTermTrack [<stormId].inp] file
     #
-    adeckFile=adeck.get('filename')
-    adeckSTTfile="a{}.dat".format(stormId)
-    utils.linkFile(dataDir,adeckFile,stormDir,adeckSTTfile) # Link adeck file
     commandList=[config['programs']['shortTermTrack']['exe']]
     commandArgs=[]
     commandArgs.extend([adeckSTTfile,config['datetimes']['synpDTG'].strftime("%Y%m%d%H"),'CURR'])

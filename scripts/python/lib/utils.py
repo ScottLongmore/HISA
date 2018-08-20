@@ -684,3 +684,50 @@ def prependAbsPath(args):
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+def textFileRecordFilter(inputFile,outputFile,recordREs):
+
+    try:
+        inputFH=open(inputFile,"r")     
+    except:
+        msg="Unable to open input file: {}".format(inputFile)
+        LOG.warning(msg)
+        return(False)
+
+    try:
+        outputFH=open(outputFile,"w")
+    except:
+        msg="Unable to open output file: {}".format(outputFile)
+        LOG.warning(msg)
+        return(False)
+
+    patterns=[]
+    for recordRE in recordREs:
+        try:
+            patterns.append(re.compile(recordRE))
+        except:
+            msg="Problem compiling RE: {}".format(recordRE)
+            LOG.warning(msg)
+            return(False)
+
+    for line in inputFH:
+        for pattern in patterns: 
+            try:
+                match=pattern.match(line)
+                if(match):
+                    outputFH.write(line)
+            except:
+                msg="Problem matching {} with line {}".format(match.string,line)
+                LOG.warning(msg)
+                return(False)
+
+    try:
+        inputFH.close()
+        outputFH.close()
+    except:
+        msg="Problem closeing input and/or output files"
+        LOG.warning(msg)
+        return(False)
+
+    return(True)
+

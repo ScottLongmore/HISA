@@ -121,7 +121,7 @@ PROGRAM ShortTermTrack_mirs
   IF (cadeck(2:3) .EQ. 'al' .OR. cadeck(2:3) .EQ. 'ep' .OR. cadeck(2:3) .EQ. 'cp') THEN
      fcst='OFCL'
      fcsti='OFCI'
-     fcstb='BAMM'
+     fcstb='TABM'
   ELSEIF (cadeck(2:3) .EQ. 'wp' .OR. cadeck(2:3) .EQ. 'io' .OR. cadeck(2:3) .EQ. 'sh') THEN
      fcst='JTWC'
      fcsti='JTWI'

@@ -26,13 +26,15 @@
       "inputKey":"adeck_input",
       "module":"ADECK",
       "dataMethod":"adeck",
-      "filterMethod":"latestAdecks"
+      "filterMethod":"latestAdecks",
+      "recordREs":['^.*CARQ.*$','^.*OFCL.*$','^.*OFCI.*$','^.*TABM.*$','^.*JTWC.*$','^.*JTWI.*$','^.*MBAM.*$']
     },
     "gfs":{
       "inputKey":"gfs_input",
       "module":"GFS",
       "dataMethod":"gfs",
       "filterMethod":"latestGFS"
+      "gfsFV3flag":true
     },
     "mirs_atms_img":{
       "inputKey":"mirs_img_input",
