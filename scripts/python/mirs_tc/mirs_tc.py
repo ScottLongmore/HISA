@@ -38,7 +38,7 @@ except:
 import setup_logging
 import error_codes
 import utils
-import libmirs_tc as mirs_tc 
+import libMIRSTC as mirs_tc 
 import pool.pool as pool_api
 
 # Setup Logging using logging templates
@@ -229,7 +229,7 @@ for adeck in adecks:
     adeckSSTfilename=os.path.join(stormDir,adeckSSTfile)
 
     status=utils.textFileRecordFilter(adeckFilename,adeckSSTfilename,config['datasets']['adeck']['recordREs'])
-    if(status not True):
+    if(not status):
         LOG.warning("Problem filtering adeck records, skipping to next storm")
         continue
 
