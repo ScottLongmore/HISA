@@ -226,9 +226,9 @@ for adeck in adecks:
     adeckFile=adeck.get('filename')
     adeckFilename=os.path.join(dataDir,adeckFile)
     adeckSTTfile="a{}.dat".format(stormId)
-    adeckSSTfilename=os.path.join(stormDir,adeckSSTfile)
+    adeckSTTfilename=os.path.join(stormDir,adeckSTTfile)
 
-    status=utils.textFileRecordFilter(adeckFilename,adeckSSTfilename,config['datasets']['adeck']['recordREs'])
+    status=utils.textFileRecordFilter(adeckFilename,adeckSTTfilename,config['datasets']['adeck']['recordREs'])
     if(not status):
         LOG.warning("Problem filtering adeck records, skipping to next storm")
         continue

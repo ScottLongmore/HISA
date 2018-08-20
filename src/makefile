@@ -19,6 +19,7 @@ all:
 	(cd oparet/oparet; $(MAKE))
 
 install:
+	mkdir -p ${INSTALLDIR}
 	cp gfspack/bin2pack.x $(INSTALLDIR)/bin2pack.x
 	cp ShortTermTrack/ShortTermTrack_mirs.x $(INSTALLDIR)/ShortTermTrack_mirs.x
 	cp afdeck/afdeck.x $(INSTALLDIR)/afdeck.x
