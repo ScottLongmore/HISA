@@ -36,7 +36,6 @@ except:
 import setup_logging
 import error_codes
 import utils
-import MIRS_TC 
 
 # Setup Logging using logging templates
 LOG = logging.getLogger("compareTables") #create the logger for this file

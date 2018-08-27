@@ -1,1 +1,0 @@
-../plugins/mirs_tc/plgnMIRS_TC_DRT.py
