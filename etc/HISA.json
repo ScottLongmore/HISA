@@ -125,7 +125,7 @@
       }
     },
     "oparet":{
-      "exe":"bin/oparet.x",
+      "exe":"bin/HISA.x",
       "configs":{
         "oparet":"etc/oparet/oparet.cfg",
         "coeffsDir":"etc/oparet/coeffs"

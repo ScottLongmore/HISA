@@ -24,12 +24,12 @@ install:
 	cp ShortTermTrack/ShortTermTrack_mirs.x $(INSTALLDIR)/ShortTermTrack_mirs.x
 	cp afdeck/afdeck.x $(INSTALLDIR)/afdeck.x
 	cp satcenter/satcenter.x $(INSTALLDIR)/satcenter.x
-	cp oparet/oparet/oparet.x $(INSTALLDIR)/oparet.x
+	cp oparet/oparet/HISA.x $(INSTALLDIR)/HISA.x
 	cp gfspack/bin2pack.x $(TESTDIR)/gfspack/bin2pack.x
 	cp ShortTermTrack/ShortTermTrack_mirs.x $(TESTDIR)/ShortTermTrack/ShortTermTrack_mirs.x
 	cp afdeck/afdeck.x $(TESTDIR)/afdeck/afdeck.x
 	cp satcenter/satcenter.x $(TESTDIR)/satcenter/satcenter.x
-	cp oparet/oparet/oparet.x $(TESTDIR)/oparet/oparet.x
+	cp oparet/oparet/HISA.x $(TESTDIR)/oparet/HISA.x
 
 clean:
 	@echo " Cleaning gfspack/"
@@ -49,10 +49,10 @@ clean:
 
 uninstall:
 	@echo " Uninstalling..."
-	@(cd $(INSTALLDIR); rm bin2pack.x ShortTermTrack_mirs.x afdeck.x satcenter.x oparet.x)
+	@(cd $(INSTALLDIR); rm bin2pack.x ShortTermTrack_mirs.x afdeck.x satcenter.x HISA.x)
 	rm $(TESTDIR)/gfspack/bin2pack.x
 	rm $(TESTDIR)/ShortTermTrack/ShortTermTrack_mirs.x
 	rm $(TESTDIR)/afdeck/afdeck.x
 	rm $(TESTDIR)/satcenter/satcenter.x
-	rm $(TESTDIR)/oparet/oparet.x
+	rm $(TESTDIR)/oparet/HISA.x
         
