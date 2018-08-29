@@ -1,10 +1,10 @@
 README.TXT -  CSU/CIRA/RAMMB Hurricane Intensity and Strength Algorithm (HISA) 
               Author: Scott Longmore, Cooperative Institute for Research in the Atmosphere (CIRA) 
               Contact: Scott.Longmore@colostate.edu
-              Last Edit: 2018-08-27
+              Last Edit: 2018-08-29
 
 
-Version Number: v2.0.3
+Version Number: v2.0.4
 
 Release Date: beta 
 
@@ -18,7 +18,7 @@ Configuration Target:
        ShortTermTrack/ - ShortTermTrack code
        afdeck/ - afdeck code
        satcenter/ - satcenter code
-       oparet/ - oparet TC wind estimation code
+       oparet/ - HISA algorithm code
        common/ - common source code 
 
     scripts/
@@ -46,7 +46,7 @@ Configuration Target:
        ShortTermTrack_mirs.x - find track from current or previous synoptic time
        afdeck.x - determines coordinates from track file
        satcenter.x -  determine satelite scanline time closest to storm
-       oparet.x - hurricane intensity and strength estimation algorithm 
+       HISA.x - hurricane intensity and strength estimation algorithm 
    
     etc/ - configuration and supplemenatry data files
           HISA.json - HISA master configuration file (will be split into sub-files in future)
@@ -105,7 +105,7 @@ Configuration Target:
               <BaSnYYYY_YYYYMMDD>.<variable> - Input variable files from pool query (renamed with prefix)
               TIMES - Output time file
 
-           oparet.x - Determines wind fields from MIRS satelite data and GFS model boundary conditions
+           HISA.x - Determines wind fields from MIRS satelite data and GFS model boundary conditions
               AVN.DAT - Input GFS model data file
               <variable.txt> - Input variable files linked to <BaSnYYYY_YYYYMMDD>.<variable> 
               COORTIMES - Input COORDINATE/TIMES concatenated file
