@@ -643,7 +643,7 @@ for adeck in adecks:
 
         # Run plotting code 
         commandList=[config['inputs']['PYTHON'],plot['exe']]
-        commandArgs=[oparetFiles['XYA']]
+        commandArgs=[plot['configs']['plot'],oparetFiles['XYA']]
         commandId="plot"
         stdoutFile=os.path.join(logDir,"{}_{}_{}.stdout".format(commandId,stormId,satId))
         stderrFile=os.path.join(logDir,"{}_{}_{}.stderr".format(commandId,stormId,satId))

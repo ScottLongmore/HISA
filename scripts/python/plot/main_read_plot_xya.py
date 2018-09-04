@@ -35,19 +35,20 @@ import setup_logging
 LOGGER = logging.getLogger(__file__)#create the logger for this file
 setup_logging.setup_logging('main_read_plot_xya','main_read_plot_xya.log')
 
-plot_config_file = 'plots_config.txt'
+#plot_config_file = 'plots_config.txt'
 
 # --- read input filename
 try:
-    input_filename = sys.argv[1]  # full path to filename
+    plot_config_file = sys.argv[1] # plot config filename
+    input_filename = sys.argv[2]  # full path to filename
 except (IndexError):
-    error_msg = 'please provide XYA data filename; USAGE: python main_read_plot_xya.py data_file.XYA'
+    error_msg = 'please provide XYA data filename; USAGE: python main_read_plot_xya.py plot_config.txt data_file.XYA output_path'
     LOGGER.exception(error_msg)
     sys.exit(error_codes.EX_USAGE) 
 
 # --- determine output dir
 try:
-    output_dir = sys.argv[2]
+    output_dir = sys.argv[3]
 except:
     output_dir = '.'
     
