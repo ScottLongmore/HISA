@@ -2,3 +2,8 @@
 *.mod
 *.x
 *.pyc
+*.swp
+*.swo
+*.log
+*.LOG
+scripts/python/test/output/*

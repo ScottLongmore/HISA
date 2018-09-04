@@ -1,9 +1,6 @@
 #!/usr/bin/python
 """
 poolQueryCoordText.py - read pool query variable text files and outputs them by lat/lon coordinates 
-
-example:
-mirs_tc.py -c <config.json> -l <input list file> -t <time:YYYYMMDDHHMMSS>
 """
     
 # System modules
@@ -38,7 +35,7 @@ except:
 import setup_logging
 import error_codes
 import utils
-import MIRS_TC 
+import HISA 
 
 # Setup Logging using logging templates
 LOG = logging.getLogger("poolQueryCoordText") #create the logger for this file
@@ -64,8 +61,8 @@ idxFile=args.index
 outFile=args.output
 
 # Read in lat,lon, variable list in
-lonPTF=MIRS_TC.readPoolTextFile(lonFile)
-latPTF=MIRS_TC.readPoolTextFile(latFile)
+lonPTF=HISA.readPoolTextFile(lonFile)
+latPTF=HISA.readPoolTextFile(latFile)
 coords={}
 indexes={}
 idxFH=open(idxFile,"w")
@@ -89,7 +86,7 @@ for varFile in varFiles:
 
     varName=os.path.basename(varFile).split('.')[0]
     varNames.append(varName)
-    varPTF=MIRS_TC.readPoolTextFile(varFile)
+    varPTF=HISA.readPoolTextFile(varFile)
 
     for idx,record in enumerate(list(zip(*varPTF['records']))): 
 

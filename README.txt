@@ -1,15 +1,18 @@
-README.TXT -  NPOESS Preparatory Project (NPP) Tropical Cyclone (TC) Science Algorithm (SA) README.TXT file
-             
+README.TXT -  CSU/CIRA/RAMMB Hurricane Intensity and Strength Algorithm (HISA) 
               Author: Scott Longmore, Cooperative Institute for Research in the Atmosphere (CIRA) 
               Contact: Scott.Longmore@colostate.edu
-              Last Edit: 2017-09-26
+              Last Edit: 2018-09-04
 
 
-Version Number: v2.0.2
+Version Number: v2.0.5
 
-Release Date: alpha 
+Release Date: beta 
 
 Configuration Target:
+
+  - Syntax
+
+    /path/to/python2.7 /path/to/scripts/python/HISA/HISA.py -c /path/to/etc/HISA_<sat>.json -i /path/to/working/directory/HISA.PCF
 
   - Source Directory Structure
 
@@ -19,65 +22,69 @@ Configuration Target:
        ShortTermTrack/ - ShortTermTrack code
        afdeck/ - afdeck code
        satcenter/ - satcenter code
-       oparet/ - oparet TC wind estimation code
+       oparet/ - HISA algorithm code
        common/ - common source code 
 
     scripts/
-       bash/
-           NPP_TC.sh - Master control script
-           NPP_TC_LIB.sh - Library functions
-           NPP_TC_GRIB2PACK.sh - Converts GFS grib2 files to binary, then pack utilizing bin2pack.x
-           NPP_TC_MKCONFIG.sh - Create query configuration file for MIRS query data script
-                             files to create the NPP_TC.PCF
-           NPP_TC_CRON.sh - crontab script that sets time, rundir and executes NPP_TC.sh
-    
        python/ - python scripts
-          mirs_tc/ - MIRS scheduling software
-             mirs_tc.py - scheduling script for MIRS, links latest ATCF, GFS, and 
-                          MIRS/NPP data to current run directory, runs NPP_TC.sh, 
-                          eventually will replace NPP_TC.sh
+          HISA/ - HISA system 
+             HISA.py - HISA system driver
+             libHISA.py - HISA library routines
+             dataset.py - parent dataset class (abstract)
+             ADECK.py - ATCF/ADECK dataset class 
+             GFS.py - GFS dataset class
+             ATMS.py - MiRS/ATMS dataset class
+             NDE.py - NDE I/O library 
           pool/ - MIRS data subset extraction code
              data_pool.py - Extracts a subset of MIRS data from netCDF files to the query subdirectory
           convert/ - converts XYA/RZA files to netCDF
             convert2netCDF.py - netCDF converter
           plot/ - TC wind estimation plotting software
             main_read_plot_xya.py - Plots Wind Field Estimation File
-          common/ - common python source code
+          lib/ - library utility modules and routines 
+          test/ - unit tests for system components
+            fixtures/ - test data
 
     bin/ - compiled binaries
-       bin2pack.x - converts GFS GRIB to pack format
+       bin2pack.x - converts GFS GRIB to CIRA pack format
        ShortTermTrack_mirs.x - find track from current or previous synoptic time
        afdeck.x - determines coordinates from track file
        satcenter.x -  determine satelite scanline time closest to storm
-       oparet.x - wind intensity estimation algorithm 
+       HISA.x - hurricane intensity and strength estimation algorithm 
    
     etc/ - configuration and supplemenatry data files
-          MIRS_TC.json - master MIRS-TC configuration file 
-          MIRS_TC_POOL.ini - configuration file for data pool
-          oparet.cfg - scale, offset, and valid values for oparet input data
-          plots_config.txt - ploting configuration file
-          exitCodes.txt - general and script/executable specific error codes
-          MIRS_TC_RT.json - configuration file for task scheduler
-          MIRS_TC.crontab - scheduling script crontab
-          MIR_TC_CRON.sh - scheduling crontab script
+          HISA_<sat>.json - HISA master configuration file (will be split into sub-files in future)
+          mirs_atms_img.ini - configuration file for data pool
+          oparet/oparet.cfg - scale, offset, and valid values for oparet input data
+          oparet/coeffs/<instrument>
+             oparet_params.cfg - main <instrument> config file
+             pmn_atms0.inp.coef - Pressure miniumn coefficents?  
+             r34_atms0.inp.coef - 34kt radius coefficients 
+             r50_atms0.inp.coef - 50kt radius coefficients
+             r64_atms0.inp.coef - 64kt radius coefficients
+             vmx_atms0.inp.coef - Max velocity coeffcients
+          convert/<sat>_xya2netCDF.json - XYA oparet text output to netCDF config
+          convert/<sat>_rza2netCDF.json - RZA oparet text output to netCDF config
+          plot/<sat>_plots_config.txt - ploting configuration file
     
     doc/ - documentation files
+          StatusCodes.txt - general and script/executable specific status/exit/error codes
 
     test/ - component test directory
 
   - Working Directory Structure
 
-    <WORKDIR>/ - Working Directory
+    <RootDir>/ - Root Working Directory
 
-       MIRS_TC.PCF - Process Control File, including all path, directory, external program, variables, settings, data filename, etc
-       MIRS_TC.PSF - Process Status File
-       MIRS_TC.LOG - Process Log File
+       HISA.PCF - Process Control File, including all path, directory, external program, variables, settings, data filename, etc
+       HISA.PSF - Process Status File
+       HISA.LOG - Process Log File
 
-       data/ - Input data files: storm track (deck text), GFS (grib), and MIRS ATMS (netCDF) 
+       data/ - Input data files: storm track ATCF adeck (text), GFS (grib), and MIRS ATMS (netCDF) 
 
-          <aBaSnYYYY.dat> - Input adeck file 
-          <gfs analysis file> - GFS analysis file (grib or pack)
-          <mirs data files> - MIRS data files (netCDF)
+          <jtwc|nhc)_aBaSnYYYY.dat.YYYYmmddHHMMSS" - Input adeck file 
+          <gfs.tHHz.pgrb2.1p00.fHHH.YYYYmmdd> - GFS analysis file (grib or pack)
+          <NPR-MIRS-(SND|IMG)_vVVrR_Sat_sYYYYmmddHHMMFFF_eYYYYmmddHHMMFFF_cYYYYmmddHHMMFFF.nc> - MIRS data files (netCDF)
 
        model/ - Conversion of GFS grib to pack files
           *.bin - variable bin files
@@ -102,7 +109,7 @@ Configuration Target:
               <BaSnYYYY_YYYYMMDD>.<variable> - Input variable files from pool query (renamed with prefix)
               TIMES - Output time file
 
-           oparet.x - Determines wind fields from MIRS satelite data and GFS model boundary conditions
+           HISA.x - Determines wind fields from MIRS satelite data and GFS model boundary conditions
               AVN.DAT - Input GFS model data file
               <variable.txt> - Input variable files linked to <BaSnYYYY_YYYYMMDD>.<variable> 
               COORTIMES - Input COORDINATE/TIMES concatenated file
@@ -134,11 +141,11 @@ Configuration Target:
          TC-<BaSnYYYY>-<field>-<level>_<ver>_<sat>_sYYYYMMDDHHMMSSS_eYYYYMMDDHHMMSSS_cYYYYMMDDHHMMSSS.png - Storm image files 
 
        log/
-         NPP_TC.LOG - Process Log File 
-         <subprocess>.log - Sub-process log files
+         <wgrib_YYmmddHH_F000_<fieldId/level>.log/err - wgrib sub-process log files
+         <subprocess>_<stormId>.log/err - Sub-process storm loop log files
+         <subprocess>_<stormId>_<satId>.log/err - Sub-process storm satellite log files
 
 Reference Documents:
-  
 
 
 Compilation Instructions:
@@ -157,11 +164,11 @@ Compilation Instructions:
 
 Product Control File Description:
 
-    The following data files are needed for NPP TC wind estimation algorithm:
+    The following data files are needed for HISA: 
 
-       -  The latest adeck storm track text files avaiable from NHC/JTWC 
-       -  The latest GFS model analysis file in grib format 
-       -  The latest set of MIRS netCDF files within the last 16hr
+       -  The latest ATCDF adeck storm track text files avaiable from NHC/JTWC 
+       -  The latest GFS/FV3 model analysis (F000) file in grib2 format 
+       -  The latest set of MIRS (AMSU/ATMS) netCDF files within the last 9hr
 
 Product Status File Description:
       

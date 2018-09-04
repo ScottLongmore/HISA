@@ -1,9 +1,8 @@
-all:
-- Update MIRS_TC to HISA in documentation, code headers
+Updated 2018/09/02
 
 driver:
-- Clean up MIRS_TC.json
-- Break MIRS_TC.json into sub JSON files by section or theme
+- Clean up HISA_<sat>.json
+- Break HISA_<sat>.json into sub JSON files by section or theme
 - Add schemas for JSON files
 
 dataset classes:
@@ -19,13 +18,6 @@ convert2netCDF:
 
 plotting:
 - Call plot code API directly, remove system call to main_read_plot_xya.py 
-
-scheduler:
-- Refactor plgnMIRS_TC.py TASKS routine ATCF/ATMS/GFS file finding logic to MIRS_TC.py routine
-- Refactor plgnMIRS_TC.py WORK routine PCF logic to NDE.py routine
-
-case driver:
-- Create case run script (with input time ranges, basins, etc)
 
 long term:
 - Refactor satcenter to python routine

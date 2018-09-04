@@ -65,12 +65,12 @@ FINCS =
 ASRC	= dims.f90 cons.f90 params.f90 ncepll.f90 cgrid.f90 ncepfg.f90 ncepp.f90 \
           sinfo1.f90 sinfo2.f90 sinfo3.f90 io.f90 asciidat_routines.f90 \
           utils.f90 hstatic.f90 sphfun.f90 srsubs.f90 bwcal.f90 \
-	  vradsubs.f90 amsusubs.f90 besubs.f90 opsubs.f90 oparet.f90 
+	  vradsubs.f90 amsusubs.f90 besubs.f90 opsubs.f90 oparet.f90 HISA.f90
 AOBS	= $(ASRC:.f90=.o)
 
 #EXE	= pickavn oparet
 #EXE	= oparet_calval.x
-EXE	= oparet.x
+EXE	= HISA.x
 
 #-----------------------------------------------------------------------------
 #                          -- Define dependecies --
@@ -136,7 +136,7 @@ pickavn: $(POBS)
 #---------------
 
 #oparet_calval.x: $(AOBS)
-oparet.x: $(AOBS)
+HISA.x: $(AOBS)
 	$(FC) $(FL_FLAGS) $@ $(AOBS) $(FLIBS)
 %.o:%.f90
 	$(FC) $(FC_FLAGS) $<

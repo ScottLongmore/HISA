@@ -1,4 +1,9 @@
-      program oparet
+      module oparet
+
+        implicit none
+
+        contains
+
       ! This program performs retrievals of temperature, heights,
       ! surface pressure and winds using the AMSU temperatures at
       ! the satellite footprints. 
@@ -60,6 +65,8 @@
       !              = dd+50 if 06 or 18 UTC analysis
       !
       ! Specify the lon/lat dimensions of the AMSU analysis domain
+
+      subroutine oparetsub()
 
         ! Source modules
         use dims        ! Dimension Declaration
@@ -1448,7 +1455,7 @@
         write(lulog,290)
         290 format(/,' Program oparet completed normally.')
 
-      end program oparet
+      end subroutine oparetsub 
 
       ! Writes Grid Info
       subroutine gridwrit(rr,zz)
@@ -1457,6 +1464,7 @@
         use cgrid
         use io
         use sinfo3
+        implicit none
 
         real,intent(in) :: rr(nr),zz(nz)
 
@@ -1516,6 +1524,7 @@
           use sinfo2
           use sinfo3
           use utils
+          implicit none
 
           integer,intent(in) :: lufix,ippmin,ipvmax
           real, intent(in) :: thresh,rad
@@ -1525,6 +1534,9 @@
           integer :: ispd,ihead,irmp,irad,itime2,jtime2
           integer :: ipr34(6),ipr50(6),ipr64(6)
           integer :: k
+          integer :: idtsa
+          integer :: instr
+          integer :: kyr,kmon,kday,ktime4
 
           ! Convert output variables to integers 
           do k=1,6
@@ -1678,16 +1690,20 @@
         ! command is of the form
         ! Fri May 17 16:00:42 GMT 2002
           use io
+          implicit none
 
           integer,intent(inout) :: kyr,kmon,kday,ktime
           character(len=3),intent(inout) :: cdow
 
           character(len=3) :: cmon,cmonl(12)
           integer :: k
+          integer :: khr,kmin
 
           kyr = 0
           kmon= 0
           kday= 0 
+          khr=0
+          kmin=0
           ktime=0
           cdow='XXX'
 
@@ -1721,4 +1737,4 @@
 
         end subroutine cdt
 
-
+      end module oparet
