@@ -160,8 +160,8 @@
     "convert2NetCDF":{
       "exe":"scripts/python/convert/convert2netCDF.py",
       "configs":{
-         "XYA":"etc/convert/xya2netCDF.json",
-         "RZA":"etc/convert/rza2netCDF.json"
+         "XYA":"etc/convert/snpp_xya2netCDF.json",
+         "RZA":"etc/convert/snpp_rza2netCDF.json"
        }
     },
     "plot":{
