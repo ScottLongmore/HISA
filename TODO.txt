@@ -1,11 +1,8 @@
-Updated 2018/08/27
-
-all:
-- Update MIRS_TC to HISA in documentation, code headers
+Updated 2018/09/02
 
 driver:
-- Clean up MIRS_TC.json
-- Break MIRS_TC.json into sub JSON files by section or theme
+- Clean up HISA_<sat>.json
+- Break HISA_<sat>.json into sub JSON files by section or theme
 - Add schemas for JSON files
 
 dataset classes:

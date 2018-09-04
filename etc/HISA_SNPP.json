@@ -69,7 +69,7 @@
   "satellites":{
     "snpp":{
       "instrument":"atms",
-      "ident":"SNP001",
+      "ident":"SNPP01",
       "productId":"npp",
       "pool":{
         "config":{"$ref":"#/files/pool/mirs_atms_img"},
@@ -167,7 +167,7 @@
     "plot":{
       "exe":"scripts/python/plot/main_read_plot_xya.py",
       "configs":{
-         "plot":"etc/plot/plots_config.txt"
+         "plot":"etc/plot/snpp_plots_config.txt"
       },
       "outputs":{
         "plotRE":"^(?P<sat>\\w+)_(?P<var>\\w+)_(?P<instr>\\w+)_(?P<level>\\w+).(?P<ext>png)$"

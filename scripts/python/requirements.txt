@@ -1,0 +1,8 @@
+configparser==3.5.0
+psutil==5.4.5
+numpy==1.14.3
+pandas==0.23.0
+netCDF4==1.4.0
+h5py==2.7.1
+matplotlib==2.0.2
+basemap==1.0.7

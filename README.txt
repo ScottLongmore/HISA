@@ -1,14 +1,18 @@
 README.TXT -  CSU/CIRA/RAMMB Hurricane Intensity and Strength Algorithm (HISA) 
               Author: Scott Longmore, Cooperative Institute for Research in the Atmosphere (CIRA) 
               Contact: Scott.Longmore@colostate.edu
-              Last Edit: 2018-08-29
+              Last Edit: 2018-09-04
 
 
-Version Number: v2.0.4
+Version Number: v2.0.5
 
 Release Date: beta 
 
 Configuration Target:
+
+  - Syntax
+
+    /path/to/python2.7 /path/to/scripts/python/HISA/HISA.py -c /path/to/etc/HISA_<sat>.json -i /path/to/working/directory/HISA.PCF
 
   - Source Directory Structure
 
@@ -30,7 +34,7 @@ Configuration Target:
              ADECK.py - ATCF/ADECK dataset class 
              GFS.py - GFS dataset class
              ATMS.py - MiRS/ATMS dataset class
-             NDE.py - NDE I/O class
+             NDE.py - NDE I/O library 
           pool/ - MIRS data subset extraction code
              data_pool.py - Extracts a subset of MIRS data from netCDF files to the query subdirectory
           convert/ - converts XYA/RZA files to netCDF
@@ -42,14 +46,14 @@ Configuration Target:
             fixtures/ - test data
 
     bin/ - compiled binaries
-       bin2pack.x - converts GFS GRIB to pack format
+       bin2pack.x - converts GFS GRIB to CIRA pack format
        ShortTermTrack_mirs.x - find track from current or previous synoptic time
        afdeck.x - determines coordinates from track file
        satcenter.x -  determine satelite scanline time closest to storm
        HISA.x - hurricane intensity and strength estimation algorithm 
    
     etc/ - configuration and supplemenatry data files
-          HISA.json - HISA master configuration file (will be split into sub-files in future)
+          HISA_<sat>.json - HISA master configuration file (will be split into sub-files in future)
           mirs_atms_img.ini - configuration file for data pool
           oparet/oparet.cfg - scale, offset, and valid values for oparet input data
           oparet/coeffs/<instrument>
@@ -59,9 +63,9 @@ Configuration Target:
              r50_atms0.inp.coef - 50kt radius coefficients
              r64_atms0.inp.coef - 64kt radius coefficients
              vmx_atms0.inp.coef - Max velocity coeffcients
-          convert/xya2netCDF.json - XYA oparet text output to netCDF config
-          convert/rza2netCDF.json - RZA oparet text output to netCDF config
-          plot/plots_config.txt - ploting configuration file
+          convert/<sat>_xya2netCDF.json - XYA oparet text output to netCDF config
+          convert/<sat>_rza2netCDF.json - RZA oparet text output to netCDF config
+          plot/<sat>_plots_config.txt - ploting configuration file
     
     doc/ - documentation files
           StatusCodes.txt - general and script/executable specific status/exit/error codes
@@ -137,7 +141,9 @@ Configuration Target:
          TC-<BaSnYYYY>-<field>-<level>_<ver>_<sat>_sYYYYMMDDHHMMSSS_eYYYYMMDDHHMMSSS_cYYYYMMDDHHMMSSS.png - Storm image files 
 
        log/
-         <subprocess>.log - Sub-process log files
+         <wgrib_YYmmddHH_F000_<fieldId/level>.log/err - wgrib sub-process log files
+         <subprocess>_<stormId>.log/err - Sub-process storm loop log files
+         <subprocess>_<stormId>_<satId>.log/err - Sub-process storm satellite log files
 
 Reference Documents:
 
@@ -161,7 +167,7 @@ Product Control File Description:
     The following data files are needed for HISA: 
 
        -  The latest ATCDF adeck storm track text files avaiable from NHC/JTWC 
-       -  The latest GFS model analysis (F000) file in grib2 format 
+       -  The latest GFS/FV3 model analysis (F000) file in grib2 format 
        -  The latest set of MIRS (AMSU/ATMS) netCDF files within the last 9hr
 
 Product Status File Description:
