@@ -1,12 +1,15 @@
 README.TXT -  CSU/CIRA/RAMMB Hurricane Intensity and Strength Algorithm (HISA) 
-              Author: Scott Longmore, Cooperative Institute for Research in the Atmosphere (CIRA) 
-              Contact: Scott.Longmore@colostate.edu
-              Last Edit: 2018-09-04
+              Principal Investigator: Galina Chirokova, Cooperative Institute for Research in the Atmosphere (CIRA)
+              Software Engineer: Scott Longmore, Cooperative Institute for Research in the Atmosphere (CIRA) 
+              Contacts: Galina.Chirokova@colostate.edu, Scott.Longmore@colostate.edu
+              Last Edit: 2018-10-10
 
 
 Version Number: v2.0.5
 
 Release Date: beta 
+
+Disclosure: The NRL data reader is proprietary and should *not* be redistributed in any way or be used outside the HISA system.  
 
 Configuration Target:
 
